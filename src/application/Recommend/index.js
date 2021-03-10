@@ -12,15 +12,14 @@ import { Content } from './style';
 import useSWR from 'swr';
 import { fetcher } from '../../api/recommend/request';
 import { forceCheck } from 'react-lazyload';
+import Loading from '../../components/Loading';
 function Recommend(props) {
   const myRef = React.createRef();
 
   const { data: bannerData } = useSWR('/banner', fetcher);
   const { data: recommendListData } = useSWR('/personalized', fetcher);
-
   return (
     <Content>
-      <div className="before"></div>
       <Scroll className="list" ref={myRef} onScroll={forceCheck}>
         <div>
           <Slider bannerList={bannerData ? bannerData.banners : []}></Slider>
@@ -32,6 +31,7 @@ function Recommend(props) {
           ></RecommendList>
         </div>
       </Scroll>
+      {bannerData && recommendListData ? null : <Loading></Loading>}
     </Content>
   );
 }
