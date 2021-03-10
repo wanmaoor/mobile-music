@@ -11,6 +11,7 @@ import Scroll from '../../components/Scroll/index';
 import { Content } from './style';
 import useSWR from 'swr';
 import { fetcher } from '../../api/recommend/request';
+import { forceCheck } from 'react-lazyload';
 function Recommend(props) {
   const myRef = React.createRef();
 
@@ -20,10 +21,13 @@ function Recommend(props) {
   return (
     <Content>
       <div className="before"></div>
-      <Scroll className="list" ref={myRef}>
+      <Scroll className="list" ref={myRef} onScroll={forceCheck}>
         <div>
           <Slider bannerList={bannerData ? bannerData.banners : []}></Slider>
           <RecommendList
+            handleRefresh={() => {
+              myRef.current.recompute();
+            }}
             recommendList={recommendListData ? recommendListData.result : []}
           ></RecommendList>
         </div>
