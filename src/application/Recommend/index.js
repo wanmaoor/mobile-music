@@ -4,13 +4,14 @@
  * @Author: wanmao
  * @LastEditors: wanmao
  */
-import React from 'react';
+import React, { useEffect } from 'react';
 import Slider from '../../components/slider/index'
 import RecommendList from '../../components/recommend-list/index'
 import Scroll from '../../components/Scroll/index'
 import {Content} from './style'
 function Recommend(props) {
   //mock 数据
+  const myRef = React.createRef()
   const bannerList = [1, 2, 3, 4].map((item) => {
     return {
       imageUrl:
@@ -27,10 +28,13 @@ function Recommend(props) {
         name: '朴树、许巍、李健、郑钧、老狼、赵雷',
       };
     });
-
+    useEffect(() => {
+     console.log(myRef); 
+    })
   return (
     <Content>
-      <Scroll className="list">
+      <div className="before"></div>
+      <Scroll className="list" ref={myRef}>
         <div>
           <Slider bannerList={bannerList}></Slider>
           <RecommendList recommendList={recommendList}></RecommendList>

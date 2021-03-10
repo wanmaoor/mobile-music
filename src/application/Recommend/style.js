@@ -1,5 +1,10 @@
+/*
+ * @Description: 
+ * @version: 
+ * @Author: wanmao
+ * @LastEditors: wanmao
+ */
 import styled from 'styled-components';
-
 export const Content = styled.div`
   position: fixed;
   top: 90px;

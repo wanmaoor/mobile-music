@@ -31,6 +31,7 @@ const Slider = (props) => {
     <SliderContainer>
       <div className="before"></div>
       <div className="slider-container">
+        <div className="before"></div>
         <div className="swiper-wrapper">
           {bannerList.map((slider) => {
             return (

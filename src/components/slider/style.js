@@ -1,3 +1,9 @@
+/*
+ * @Description: 
+ * @version: 
+ * @Author: wanmao
+ * @LastEditors: wanmao
+ */
 import styled from 'styled-components';
 import style from '../../assets/global-style';
 
@@ -10,8 +16,8 @@ export const SliderContainer = styled.div`
   background: white;
   .before {
     position: absolute;
-    top: 0;
-    height: 60%;
+    top: -300px;
+    height: 400px;
     width: 100%;
     background: ${style['theme-color']};
   }
