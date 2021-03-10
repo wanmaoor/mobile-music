@@ -58,7 +58,7 @@ export const ListItem = styled.div`
     overflow: hidden;
     margin-top: 2px;
     padding: 0 2px;
-    height: 40px;
+    height: 50px;
     text-align: left;
     font-size: ${style['font-size-s']};
     line-height: 1.4;
