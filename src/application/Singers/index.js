@@ -11,7 +11,7 @@ import { NavContainer } from './style';
 import { List, ListContainer, ListItem } from './style';
 import Scroll from '../../components/Scroll';
 import { useDispatch, useSelector } from 'react-redux';
-import { REQUEST_HOT_SINGER_LIST, REQUEST_SINGER_LIST } from './action';
+import { REQUEST_HOT_SINGER_LIST } from './action';
 
 const renderSingerList = (list) => {
   return (
