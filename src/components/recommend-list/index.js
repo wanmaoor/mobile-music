@@ -4,11 +4,10 @@
  * @Author: wanmao
  * @LastEditors: wanmao
  */
-import React from 'react';
+import React, { Suspense } from 'react';
 import { ListWrapper, ListItem, List } from './style';
 import { getCount } from '../../api/utils';
 import Icon from '../../components/Icon';
-import LazyLoad from 'react-lazyload';
 const RecommendList = (props) => {
   return (
     <ListWrapper>
@@ -20,8 +19,8 @@ const RecommendList = (props) => {
               <div className="img_wrapper">
                 <div className="decorate"></div>
                 {/* 加此参数可以减小请求的图片资源大小 */}
-                <LazyLoad
-                  placeholder={
+                <Suspense
+                  fallback={
                     <img
                       width="100%"
                       height="100%"
@@ -37,7 +36,7 @@ const RecommendList = (props) => {
                     alt="music"
                     onLoad={props.handleRefresh}
                   />
-                </LazyLoad>
+                </Suspense>
                 <div className="play_count">
                   <span className="count">{getCount(item.playCount)}</span>
                 </div>
