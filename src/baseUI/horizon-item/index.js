@@ -45,7 +45,7 @@ const Horizon = (props) => {
     Array.from(tagElements).forEach(ele => {
       totalWidth += ele.offsetWidth
     })
-    categoryDOM.style.width = totalWidth + 'px'
+    categoryDOM.style.width = totalWidth + 10 + 'px'
   }, [])
 
   return (
