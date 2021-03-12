@@ -82,7 +82,7 @@ function Singers() {
 
   const handleScroll = debounce((scroll) => {
     dispatch({ type: SCROLL_ACTION, payload: scroll });
-  }, 300);
+  }, 100);
 
   return (
     <>
