@@ -13,7 +13,7 @@ import useSWR from 'swr';
 import { fetcher } from '../../api/recommend/request';
 import { forceCheck } from 'react-lazyload';
 import Loading from '../../components/Loading';
-function Recommend(props) {
+function Recommend() {
   const myRef = React.createRef();
 
   const { data: bannerData } = useSWR('/banner', fetcher);

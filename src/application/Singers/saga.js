@@ -2,14 +2,14 @@ import { takeEvery, put } from 'redux-saga/effects';
 import { axiosInstance } from '../../api/config';
 import { GET_HOT_SINGER_LIST, GET_SINGER_LIST, REQUEST_SINGER_LIST, REQUEST_HOT_SINGER_LIST } from './action';
 function* getSingerList(action) {
-  const { category, alpha, count } = action.payload;
+  const { type, alpha, area } = action.payload;
   const data = yield axiosInstance({
     method: 'GET',
     url: '/artist/list',
     params: {
-      cat: category,
+      type,
       initial: alpha.toLowerCase(),
-      offset: count,
+      area
     },
   });
   yield put({ type: GET_SINGER_LIST, payload: data.artists });
@@ -21,7 +21,7 @@ function* getHotSingerList(action){
     method:'GET',
     url: '/top/artists',
     params: {
-      offset: count
+      limit: count
     }
   })
   yield put({type: GET_HOT_SINGER_LIST, payload: data.artists})
