@@ -43,26 +43,23 @@ const renderSingerList = (list) => {
 };
 function Singers() {
   const firstUpdate = useRef(true);
-  const firstHotSingerUpdate = useRef(true);
   const myRef = useRef();
   const dispatch = useDispatch();
-  const singerList = useSelector((state) => state.singerReducer.singerList);
-  const { category, alpha, area } = useSelector(
-    (state) => state.singerReducer.pivot,
+  const { singerList, pivot, scroll, firstLoadHotSinger } = useSelector(
+    (state) => state.singerReducer,
   );
-  const scroll = useSelector((state) => state.singerReducer.scroll);
+  const {alpha, area, category} = pivot
 
   useEffect(() => {
-    if (firstHotSingerUpdate.current && !category && !alpha && !area) {
+    if (firstLoadHotSinger && !category && !alpha && !area) {
       dispatch({
         type: REQUEST_HOT_SINGER_LIST,
         payload: {
           count: 30,
         },
       });
-      firstHotSingerUpdate.current = false;
     }
-  }, [alpha, area, category, dispatch]);
+  }, [alpha, area, category, dispatch, firstLoadHotSinger]);
 
   useEffect(() => {
     if (firstUpdate.current) {
@@ -84,10 +81,6 @@ function Singers() {
   }, [singerList]);
 
   const handleScroll = debounce((scroll) => {
-    console.log(
-      '🚀 ~ file: index.js ~ line 84 ~ handleScroll ~ scroll',
-      scroll,
-    );
     dispatch({ type: SCROLL_ACTION, payload: scroll });
   }, 300);
 

@@ -16,6 +16,7 @@ const INITIAL_STATE = {
     x: 0,
     y: 0,
   },
+  firstLoadHotSinger: true,
 };
 const singerReducer = produce((draft, action) => {
   switch (action.type) {
@@ -24,6 +25,7 @@ const singerReducer = produce((draft, action) => {
       break;
     case GET_HOT_SINGER_LIST:
       draft.singerList = action.payload;
+      draft.firstLoadHotSinger = false
       break;
     case CHANGE_SINGER_PIVOT:
       draft.pivot[action.payload.key] = action.payload.val;
