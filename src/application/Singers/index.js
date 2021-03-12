@@ -15,7 +15,9 @@ import {
   CHANGE_SINGER_PIVOT,
   REQUEST_HOT_SINGER_LIST,
   REQUEST_SINGER_LIST,
+  SCROLL_ACTION,
 } from './action';
+import { debounce } from '../../api/utils';
 
 const renderSingerList = (list) => {
   return (
@@ -48,6 +50,7 @@ function Singers() {
   const { category, alpha, area } = useSelector(
     (state) => state.singerReducer.pivot,
   );
+  const scroll = useSelector((state) => state.singerReducer.scroll);
 
   useEffect(() => {
     if (firstHotSingerUpdate.current && !category && !alpha && !area) {
@@ -79,6 +82,14 @@ function Singers() {
   useEffect(() => {
     myRef.current.refresh();
   }, [singerList]);
+
+  const handleScroll = debounce((scroll) => {
+    console.log(
+      '🚀 ~ file: index.js ~ line 84 ~ handleScroll ~ scroll',
+      scroll,
+    );
+    dispatch({ type: SCROLL_ACTION, payload: scroll });
+  }, 300);
 
   return (
     <>
@@ -118,7 +129,9 @@ function Singers() {
         ></Horizon>
       </NavContainer>
       <ListContainer>
-        <Scroll ref={myRef}>{renderSingerList(singerList)}</Scroll>
+        <Scroll scrollPosition={scroll} onScroll={handleScroll} ref={myRef}>
+          {renderSingerList(singerList)}
+        </Scroll>
       </ListContainer>
     </>
   );

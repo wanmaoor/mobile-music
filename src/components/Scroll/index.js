@@ -19,12 +19,15 @@ const Scroll = forwardRef((props, ref) => {
 
   const scrollContainerRef = useRef();
 
-  const { direction, click, refresh, bounceTop, bounceBottom } = props;
+  const { direction, click, refresh, bounceTop, bounceBottom, scrollPosition } = props;
 
   const { pullUp, pullDown, onScroll } = props;
 
+ 
   useEffect(() => {
     const scroll = new BScroll(scrollContainerRef.current, {
+      startX: scrollPosition.x,
+      startY: scrollPosition.y,
       scrollX: direction === 'horizontal',
       scrollY: direction === 'vertical',
       probeType: 3,
@@ -103,9 +106,7 @@ const Scroll = forwardRef((props, ref) => {
   }));
 
   return (
-    <ScrollContainer ref={scrollContainerRef}>
-      {props.children}
-    </ScrollContainer>
+    <ScrollContainer ref={scrollContainerRef}>{props.children}</ScrollContainer>
   );
 });
 
@@ -120,6 +121,7 @@ Scroll.defaultProps = {
   pullDown: null,
   bounceTop: true,
   bounceBottom: true,
+  scrollPosition: {x:0,y:0}
 };
 
 Scroll.propTypes = {
@@ -132,6 +134,7 @@ Scroll.propTypes = {
   pullDownLoading: PropTypes.bool,
   bounceTop: PropTypes.bool, // 是否支持向上吸顶
   bounceBottom: PropTypes.bool, // 是否支持向上吸顶
+  scrollPosition: PropTypes.object
 };
 
 export default Scroll;

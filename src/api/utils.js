@@ -17,3 +17,16 @@ export const getCount = (count) => {
     return Math.floor(count / 10000000) / 10 + '亿';
   }
 };
+
+export const debounce = (fn, delay = 1000) => {
+  let id = null;
+  return function(){
+    const context = this
+    if(id) clearTimeout(id)
+    id = setTimeout(() => {
+      fn.apply(context, arguments);
+      id = null
+    }, delay);
+  }
+ 
+};
