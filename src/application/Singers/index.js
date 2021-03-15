@@ -18,6 +18,7 @@ import {
   SCROLL_ACTION,
 } from './action';
 import { debounce } from '../../api/utils';
+import Loading from '../../components/Loading';
 
 const renderSingerList = (list) => {
   return (
@@ -48,8 +49,8 @@ function Singers() {
   const { singerList, pivot, scroll, firstLoadHotSinger } = useSelector(
     (state) => state.singerReducer,
   );
-  const {alpha, area, category} = pivot
-
+  const { alpha, area, category } = pivot;
+  
   useEffect(() => {
     if (firstLoadHotSinger && !category && !alpha && !area) {
       dispatch({
@@ -123,7 +124,11 @@ function Singers() {
       </NavContainer>
       <ListContainer>
         <Scroll scrollPosition={scroll} onScroll={handleScroll} ref={myRef}>
-          {renderSingerList(singerList)}
+          {singerList.length ? (
+            renderSingerList(singerList)
+          ) : (
+            <Loading></Loading>
+          )}
         </Scroll>
       </ListContainer>
     </>
